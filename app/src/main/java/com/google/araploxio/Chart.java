@@ -29,7 +29,7 @@ import android.graphics.Paint.Align;
 import android.widget.LinearLayout;
 
 public class Chart {
-    private static final int SCROLLBACK_SIZE = 200;
+    private static final int SCROLLBACK_SIZE = 400;
 
     private int sampleCount = 0;
     private XYMultipleSeriesDataset mDataset;
@@ -49,9 +49,9 @@ public class Chart {
         mRenderer.setPointSize(1.0f);
         mRenderer.setMargins(new int[] { 10, 30, 30, 30 });
         mRenderer.setXAxisMin(0);
-        mRenderer.setXAxisMax(10);
+        mRenderer.setXAxisMax(1000);
         mRenderer.setYAxisMin(0);
-        mRenderer.setYAxisMax(100);
+        mRenderer.setYAxisMax(1);
         mRenderer.setAxesColor(Color.WHITE);
         mRenderer.setLabelsColor(Color.WHITE);
         mRenderer.setLegendHeight(0);
@@ -79,13 +79,13 @@ public class Chart {
         layout.addView(mChart);
     }
 
-    public void add(int y) {
-        int x = sampleCount++;
-
-        mCurrentSeries.add(x, y);
-
-        mRenderer.setXAxisMax(x);
-        mRenderer.setXAxisMin(x - SCROLLBACK_SIZE + 1);
+    public void add(int[] y) {
+        for (int val : y) {
+            int x = sampleCount++;
+            mCurrentSeries.add(x, val);
+            mRenderer.setXAxisMax(x);
+            mRenderer.setXAxisMin(x - SCROLLBACK_SIZE + 1);
+        }
 
         if (mCurrentSeries.getItemCount() > SCROLLBACK_SIZE)
             mCurrentSeries.remove(0);
