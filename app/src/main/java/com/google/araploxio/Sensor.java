@@ -32,7 +32,7 @@ public class Sensor {
     private static final int address = (0x50 >> 1);
     private static final String bus = "/dev/i2c-4";
 
-    private static final int BUFFER_SIZE = 2;
+    private static final int BUFFER_SIZE = 400;
     private static final String TAG = "AraVLC";
 
     private Context context;
@@ -98,8 +98,10 @@ public class Sensor {
             results = execute(bufferRead);
             data = results[0].data;
             val = getBinary(data);
-
-            handler.obtainMessage(0, val).sendToTarget();
+            for (int v : val) {
+                System.out.print(v);
+            }
+            //handler.obtainMessage(0, val).sendToTarget();
         }
     };
 
