@@ -29,7 +29,7 @@ import android.graphics.Paint.Align;
 import android.widget.LinearLayout;
 
 public class Chart {
-    private static final int SCROLLBACK_SIZE = 400;
+    private static final int SCROLLBACK_SIZE = 50;
 
     private int sampleCount = 0;
     private XYMultipleSeriesDataset mDataset;
@@ -49,7 +49,7 @@ public class Chart {
         mRenderer.setPointSize(1.0f);
         mRenderer.setMargins(new int[] { 10, 30, 30, 30 });
         mRenderer.setXAxisMin(0);
-        mRenderer.setXAxisMax(1000);
+        mRenderer.setXAxisMax(10);
         mRenderer.setYAxisMin(0);
         mRenderer.setYAxisMax(1);
         mRenderer.setAxesColor(Color.WHITE);
@@ -79,18 +79,23 @@ public class Chart {
         layout.addView(mChart);
     }
 
-    public void add(int[] y) {
-        for (int val : y) {
-            int x = sampleCount++;
-            mCurrentSeries.add(x, val);
-            mRenderer.setXAxisMax(x);
-            mRenderer.setXAxisMin(x - SCROLLBACK_SIZE + 1);
-        }
+    public void repaint() {
+       mChart.repaint();
+    }
+
+    public void add(int y) {
+        int x = sampleCount++;
+
+        mCurrentSeries.add(x, y);
+
+        mRenderer.setXAxisMax(x);
+        mRenderer.setXAxisMin(x - SCROLLBACK_SIZE + 1);
 
         if (mCurrentSeries.getItemCount() > SCROLLBACK_SIZE)
             mCurrentSeries.remove(0);
 
-        // Autoscale
+
+        /* Autoscale - Not necessqry
         double maxY = mCurrentSeries.getMaxY();
         double minY = mCurrentSeries.getMinY();
 
@@ -105,6 +110,7 @@ public class Chart {
         mRenderer.setYAxisMin(minY);
 
         mChart.repaint();
+        */
     }
 
     public void clear() {

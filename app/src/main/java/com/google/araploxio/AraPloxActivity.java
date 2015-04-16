@@ -32,8 +32,11 @@ public class AraPloxActivity extends Activity {
 
     private final Handler handler = new Handler() {
         public void handleMessage(Message msg) {
-            irChart.add((int[])msg.obj);
-            //redChart.add(msg.arg2);
+            int[] values = (int[])msg.obj;
+            for (int v : values) {
+                irChart.add(v);
+            }
+            irChart.repaint();
         }
     };
 
