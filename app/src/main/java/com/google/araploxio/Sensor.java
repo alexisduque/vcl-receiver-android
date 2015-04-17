@@ -21,8 +21,15 @@ import android.hardware.I2cManager;
 import android.hardware.I2cTransaction;
 import android.os.Handler;
 import android.os.Message;
+import android.util.Log;
 
+import java.io.BufferedReader;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.util.Date;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -32,8 +39,9 @@ public class Sensor {
     private static final int address = (0x50 >> 1);
     private static final String bus = "/dev/i2c-4";
 
-    private static final int BUFFER_SIZE = 400;
+    private static final int BUFFER_SIZE = 512;
     private static final String TAG = "AraVLC";
+    private static final String BUF = "RxData@";
 
     private Context context;
     private I2cManager i2c;
@@ -58,6 +66,7 @@ public class Sensor {
 
     public Sensor(Context context, Handler handler) {
         this.context = context;
+        //noinspection ResourceType
         this.i2c = (I2cManager)context.getSystemService("i2c");
         this.handler = handler;
     }
@@ -94,16 +103,25 @@ public class Sensor {
             I2cTransaction[] results;
             byte[] data;
             int[] val;
-
             results = execute(bufferRead);
             data = results[0].data;
-            val = getBinary(data);
-            for (int v : val) {
-                System.out.print(v);
-            }
+            //val = getBinary(data);
+            logBinary(data);
             //handler.obtainMessage(0, val).sendToTarget();
         }
     };
+
+    private void logBinary(byte[] data) {
+        String binary;
+        Date rxTimestamp = new Date();
+        StringBuilder sbBinary = new StringBuilder("");
+        for (byte b1 : data) {
+            String s1 = String.format("%8s", Integer.toBinaryString(b1 & 0xFF)).replace(' ', '0');
+            sbBinary.append(s1);
+        }
+        binary = sbBinary.toString();
+        Log.d(BUF + rxTimestamp.getTime() + ':', binary);
+    }
 
     private int[] getBinary(byte[] bytesArray) {
         int bits[] = new int[BUFFER_SIZE];
@@ -115,4 +133,5 @@ public class Sensor {
         }
         return bits;
     }
+
 }
