@@ -39,7 +39,7 @@ public class Sensor {
     private static final int address = (0x50 >> 1);
     private static final String bus = "/dev/i2c-4";
 
-    private static final int BUFFER_SIZE = 512;
+    private static final int BUFFER_SIZE = 150;
     private static final String TAG = "AraVLC";
     private static final String BUF = "RxData@";
 
@@ -97,7 +97,7 @@ public class Sensor {
         }
         execute(resetTxns);
     }
-        
+
     private final Runnable collector = new Runnable() {
         public void run() {
             I2cTransaction[] results;
