@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
-    <string name="app_name">AraI2CDemo</string>
-    <string name="chart1_name">940nm</string>
-    <string name="chart2_name">660nm</string>
+    <string name="app_name">VLC Ara Module</string>
+    <string name="chart1_name">Raw Rx Bits</string>
+    <string name="chart2_name">Bit Error Rate</string>
 </resources>

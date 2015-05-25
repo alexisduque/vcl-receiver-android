@@ -12,12 +12,21 @@
         android:background="#440044"
         android:fontFamily="sans-serif"
         android:textSize="20sp"
-        android:text="@string/chart1_name"/>
+        android:text="@string/app_name"/>
     <LinearLayout android:id="@+id/irChart"
                   android:orientation="horizontal"
                   android:layout_width="match_parent"
                   android:layout_height="0dp"
-                  android:layout_weight="1"/>
+                  android:layout_weight="1">
+
+        <EditText
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:id="@+id/rxText"
+            android:layout_weight="1"
+            android:inputType="textMultiLine"
+            android:text="Hello !" />
+    </LinearLayout>
 
     <TextView
         android:id="@+id/redTextView"
