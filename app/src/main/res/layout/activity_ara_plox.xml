@@ -12,20 +12,49 @@
         android:background="#440044"
         android:fontFamily="sans-serif"
         android:textSize="20sp"
-        android:text="@string/app_name"/>
+        android:text="@string/app_name"
+        android:textColor="@android:color/white" />
     <LinearLayout android:id="@+id/irChart"
                   android:orientation="horizontal"
                   android:layout_width="match_parent"
-                  android:layout_height="0dp"
-                  android:layout_weight="1">
+                  android:layout_height="wrap_content">
 
         <EditText
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="341dp"
             android:id="@+id/rxText"
             android:layout_weight="1"
             android:inputType="textMultiLine"
-            android:text="Hello !" />
+            android:text="Hello !"
+            android:background="@android:color/background_dark"
+            android:textColor="@android:color/white" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/background_dark"
+        android:layout_gravity="right"
+        android:gravity="center_vertical"
+        android:weightSum="1">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Clear"
+            android:id="@+id/clearBtn"
+            android:clickable="true"
+            android:layout_weight="0.5" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Save"
+            android:id="@+id/saveBtn"
+            android:clickable="true"
+            android:layout_weight="0.5" />
     </LinearLayout>
 
     <TextView
@@ -36,11 +65,16 @@
         android:fontFamily="sans-serif"
         android:gravity="center"
         android:text="@string/chart2_name"
-        android:textSize="20sp" />
+        android:textSize="20sp"
+        android:textColor="@android:color/white" />
 
     <LinearLayout android:id="@+id/redChart"
                   android:orientation="horizontal"
                   android:layout_width="match_parent"
                   android:layout_height="0dp"
-                  android:layout_weight="1"/>
+                  android:layout_weight="0.20"
+        android:background="@android:color/background_dark" >
+
+    </LinearLayout>
+
 </LinearLayout>
