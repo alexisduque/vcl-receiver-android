@@ -2,6 +2,7 @@
 <resources xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_name">VLC Ara Module</string>
-    <string name="chart1_name">Raw Rx Bits</string>
-    <string name="chart2_name">Bit Error Rate</string>
+    <string name="zone1_name">Raw Rx Bits</string>
+    <string name="zone2_name">4B6B Decoded Int</string>
+    <string name="logenabled">Log Enabled</string>
 </resources>
