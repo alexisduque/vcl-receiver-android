@@ -15,6 +15,8 @@ import android.util.Log;
 
 import java.io.IOException;
 import java.util.Date;
+import java.lang.Math;
+import java.util.Random;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
@@ -27,7 +29,6 @@ public class Sensor {
     private static final int BUFFER_SIZE = 50;
     private static final String TAG = "AraVLC";
     private static final String BUF = "RxData@";
-
     private Context context;
     private I2cManager i2c;
     private Handler handler;
@@ -40,6 +41,15 @@ public class Sensor {
     private static final I2cTransaction[] bufferRead = {
         I2cTransaction.newRead(BUFFER_SIZE),
     };
+
+    private byte[] getRandom() {
+        byte[] result = new byte[50];
+        byte[] values = {15, 23, 27, 29, 30, 39, 43, 45, 46, 47, 51, 53, 54, 57, 58, 60};
+        for (int i = 0; i < 50; i++) {
+            result[i] = values[(new Random().nextInt(values.length - 1))];
+        }
+       return result;
+    }
 
     public Sensor(Context context, Handler handler) {
         this.context = context;
@@ -78,8 +88,9 @@ public class Sensor {
             I2cTransaction[] results;
             byte[] data;
             int[] val;
-            results = execute(bufferRead);
-            data = results[0].data;
+            //results = execute(bufferRead);
+            //data = results[0].data;
+            data = getRandom();
             logBinary(data);
         }
     };
@@ -91,7 +102,8 @@ public class Sensor {
         StringBuilder sbBinary = new StringBuilder("");
         for (byte b1 : data) {
             String s1 = String.format("%8s", Integer.toBinaryString(b1 & 0xFF)).replace(' ', '0');
-            sbBinary.append(s1);
+            sbBinary.append(s1.substring(1));
+            sbBinary.append(" ");
         }
         binary = sbBinary.toString();
         Bundle b = new Bundle();
