@@ -88,9 +88,9 @@ public class Sensor {
             I2cTransaction[] results;
             byte[] data;
             int[] val;
-            //results = execute(bufferRead);
-            //data = results[0].data;
-            data = getRandom();
+            results = execute(bufferRead);
+            data = results[0].data;
+            //data = getRandom();
             logBinary(data);
         }
     };
