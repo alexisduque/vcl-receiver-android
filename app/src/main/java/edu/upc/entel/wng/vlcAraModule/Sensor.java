@@ -24,7 +24,7 @@ public class Sensor {
     private static final int address = (0x50 >> 1);
     private static final String bus = "/dev/i2c-4";
 
-    private static final int BUFFER_SIZE = 50;
+    private static final int BUFFER_SIZE = 350;
     private static final String TAG = "AraVLC";
     private static final String BUF = "RxData@";
 
